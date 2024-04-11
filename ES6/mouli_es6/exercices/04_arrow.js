@@ -1,23 +1,24 @@
-
 /**
  * Déclarer une fonction fléchée qui renvoi l'argument + 1
  * Le return est explicite
- * 
- * contrainte: 
+ *
+ * contrainte:
  *   - le mot clée "function" est interdis
  */
 
-const arrow1
+const arrow1 = (nombre) => {
+  return nombre + 1;
+};
 
 /**
  * Déclarer une fonction fléchée qui renvoi l'argument + 1
  * Le return est implicite
- * 
- * contrainte: 
+ *
+ * contrainte:
  *   - le mot clée "function" est interdis
  *   - le mot clée "return" est interdis
  */
 
-const arrow2
+const arrow2 = (nombre) => nombre + 1;
 
-module.exports = {arrow1, arrow2};
+module.exports = { arrow1, arrow2 };
