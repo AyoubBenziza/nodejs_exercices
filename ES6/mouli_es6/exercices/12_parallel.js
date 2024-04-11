@@ -1,3 +1,5 @@
+const { apiResponse } = require("./11_async");
+
 /**
  * Utilisez la fonction Promise.all pour exécuter 3 appels API en parallèle
  *

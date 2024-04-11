@@ -19,7 +19,7 @@ const extractFirstTwo = ([x, y]) => [x, y];
  * exemple: [1, 2, 3] => [2, 3]
  */
 
-const extractRest = ([x, ...y]) => y;
+const extractRest = ([, ...y]) => y;
 /**
  * utilisez la décomposition pour extraire le champ "name" de l'objet passé en paramètre
  * retournez le champ "name"
