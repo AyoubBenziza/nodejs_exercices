@@ -8,24 +8,25 @@ const {
 } = require("../controllers/taskController");
 const router = express.Router();
 const validator = require("../validators/taskValidator");
+const validate = require("../validators/validate");
 
 //--------------GET---------------//
 router.get("/", getAll);
-router.get("/:id", validator.idParam, validator.validate, getById);
+router.get("/:id", validator.idParam, validate, getById);
 
 //-------------POST--------------//
-router.post("/", validator.bodyParam, validator.validate, createTask);
+router.post("/", validator.bodyParam, validate, createTask);
 
 //-------------PUT--------------//
 router.put(
   "/:id",
   validator.idParam,
   validator.bodyParam,
-  validator.validate,
+  validate,
   updateTask
 );
 
 //------------DELETE-----------//
-router.delete("/:id", validator.idParam, validator.validate, deleteTask);
+router.delete("/:id", validator.idParam, validate, deleteTask);
 
 module.exports = router;

@@ -1,16 +1,8 @@
-const { param, body, validationResult } = require("express-validator");
+const { param, body } = require("express-validator");
 const fs = require("fs");
 const path = require("path");
 const db = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "db.json")));
 
-const validate = (req, res, next) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(422).json({ errors: errors.array() });
-  }
-
-  next();
-};
 const idParam = [
   param("id")
     .notEmpty()
@@ -18,8 +10,11 @@ const idParam = [
     .custom((id) => db.findIndex((obj) => obj.id === parseInt(id)) !== -1),
 ];
 const bodyParam = [
-  body("task").notEmpty(),
-  body("done").notEmpty().isBoolean(),
+  body("title").notEmpty(),
+  body("description").notEmpty().optional(),
+  body("done").notEmpty().isBoolean().optional(),
+  body("createdAt").notEmpty().optional(),
+  body("finishedAt").notEmpty().optional(),
 ];
 
-module.exports = { validate, bodyParam, idParam };
+module.exports = { bodyParam, idParam };

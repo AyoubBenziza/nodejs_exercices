@@ -15,6 +15,8 @@ const getById = (req, res) => {
 const createTask = (req, res) => {
   req.body.id = db.length + 1;
   req.body.createdAt = new Date(Date.now()).toLocaleString("fr-FR");
+  req.body.done = false;
+  req.body.finishedAt = "";
   db.push(req.body);
   fs.writeFileSync(path.join(__dirname, "..", "db.json"), JSON.stringify(db));
   res.json(req.body);
@@ -23,9 +25,14 @@ const createTask = (req, res) => {
 //-------------PUT--------------//
 const updateTask = (req, res) => {
   const element = db.find((obj) => obj.id == req.params.id);
-  let { task, done } = req.body;
-  element.task = task;
+  let { title, description, done, createdAt, finishedAt } = req.body;
+  element.title = title;
+  element.description = description ? description : element.description;
   element.done = done;
+  element.createdAt = createdAt;
+  element.done && !finishedAt
+    ? (element.finishedAt = new Date(Date.now()).toLocaleString("fr-FR"))
+    : (element.finishedAt = finishedAt);
   fs.writeFileSync(path.join(__dirname, "..", "db.json"), JSON.stringify(db));
   res.send("Modification effectuée");
 };
