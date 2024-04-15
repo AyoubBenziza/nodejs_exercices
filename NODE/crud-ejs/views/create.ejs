@@ -1,0 +1,42 @@
+<%- include("_header") %>
+
+<body>
+  <h1>Create</h1>
+
+  <form
+    action="/product"
+    method="post"
+  >
+    <label for="name">Name</label>
+    <input
+      id="name"
+      name="name"
+      type="text"
+      placeholder="Name ..."
+    />
+
+    <br />
+
+    <label for="price">Price</label>
+    <input
+      id="price"
+      name="price"
+      type="number"
+      placeholder="Price ..."
+    />
+
+    <br />
+
+    <label for="quantity">Quantity</label>
+    <input
+      id="quantity"
+      name="quantity"
+      type="number"
+      placeholder="Quantity ..."
+    />
+
+    <button type="submit">Submit</button>
+  </form>
+</body>
+
+<%- include("_footer") %>
