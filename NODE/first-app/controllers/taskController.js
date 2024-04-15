@@ -1,9 +1,11 @@
+const Product = require("../models/task");
 const fs = require("fs");
 const path = require("path");
 const db = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "db.json")));
 
 //--------------GET---------------//
 const getAll = (req, res) => {
+  Task.findAll().then((tasks) => res.json(tasks));
   res.json(db);
 };
 
@@ -13,8 +15,8 @@ const getById = (req, res) => {
 
 //-------------POST--------------//
 const createTask = (req, res) => {
-  req.body.id = db.length + 1;
-  req.body.createdAt = new Date(Date.now()).toLocaleString("fr-FR");
+  req.body.createdAt =
+    req.body.createAt ?? new Date(Date.now()).toLocaleString("fr-FR");
   req.body.done = false;
   req.body.finishedAt = "";
   db.push(req.body);
@@ -27,7 +29,7 @@ const updateTask = (req, res) => {
   const element = db.find((obj) => obj.id == req.params.id);
   let { title, description, done, createdAt, finishedAt } = req.body;
   element.title = title;
-  element.description = description ? description : element.description;
+  element.description = description ?? element.description;
   element.done = done;
   element.createdAt = createdAt;
   element.done && !finishedAt
@@ -35,6 +37,9 @@ const updateTask = (req, res) => {
     : (element.finishedAt = finishedAt);
   fs.writeFileSync(path.join(__dirname, "..", "db.json"), JSON.stringify(db));
   res.send("Modification effectuée");
+  Task.update({ where: { id: req.params.id } })
+    .then(() => res.send("Modification effectuée"))
+    .catch((err) => res.send(err));
 };
 
 //------------DELETE-----------//
