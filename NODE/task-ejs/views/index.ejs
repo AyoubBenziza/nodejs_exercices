@@ -1,0 +1,38 @@
+<%- include("_header") %>
+
+<body>
+  <h1>Index</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Start</th>
+        <th>End</th>
+        <th>Done</th>
+        <th><a href="/task/create">Create</a></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% for(let i = 0; i < tasks.length; i++){ %>
+      <tr>
+        <td><%= tasks[i].id %></td>
+        <td><%= tasks[i].title %></td>
+        <td><%= tasks[i].description %></td>
+        <td><%= tasks[i].start_date %></td>
+        <td><%= tasks[i].end_date %></td>
+        <td><%= tasks[i].done %></td>
+        <td>
+          <a href="/task/edit/<%= tasks[i].id %>">Edit</a>
+          <a href="/task/delete/<%= tasks[i].id %>">Delete</a>
+        </td>
+      </tr>
+      <% } %>
+    </tbody>
+  </table>
+</body>
+
+<%- include("_footer") %>
