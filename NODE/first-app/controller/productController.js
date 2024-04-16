@@ -27,7 +27,7 @@ const update = (req, res) => {
   };
 
   Product.update(product, { where: { id: req.params.id } })
-    .then((product) => res.send(product))
+    .then((product) => res.json(product))
     .catch((err) => {
       res.send(err);
     });
@@ -39,4 +39,10 @@ const destroy = (req, res) => {
   );
 };
 
-module.exports = { destroy, getAll, update, store };
+const getById = (req, res) => {
+  Product.findByPk(req.params.id).then((product) => {
+    res.json(product);
+  });
+};
+
+module.exports = { destroy, getAll, update, store, getById };
