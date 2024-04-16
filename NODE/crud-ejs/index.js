@@ -15,3 +15,13 @@ app.set("view engine", "ejs")
 app.set("views", "./views")
 
 app.use("/product", productRouter)
+
+const fs = require('node:fs');
+const content = 'Some content!\n';
+fs.appendFile('log.txt', content, err => {
+  if (err) {
+    console.error(err);
+  } else {
+    // done!
+  }
+});

@@ -3,23 +3,19 @@ const controller = {};
 
 controller.getAll = (req, res) => {
   Product.findAll().then((queryResult) => {
-    res.render("index", {products : queryResult})
-  })
+    res.render('index', { products: queryResult });
+  });
 };
 
 controller.create = (req, res) => {
-  res.render("create")
+  res.render('create');
 };
 
 controller.edit = (req, res) => {
-
-  Product.findByPk(req.params.id).then( (product) => {
-    res.render("edit", {product : product})
-  })
-
+  Product.findByPk(req.params.id).then((product) => {
+    res.render('edit', { product: product });
+  });
 };
-
-
 
 controller.store = (req, res) => {
   const product = {
@@ -28,11 +24,11 @@ controller.store = (req, res) => {
     price: req.body.price,
   };
 
-  console.log(product)
+  console.log(product);
 
   Product.create(product)
     .then((product) => {
-      res.redirect('/product')
+      res.redirect('/product');
     })
     .catch((err) => {
       res.send(err);
